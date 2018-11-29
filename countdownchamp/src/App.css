@@ -13,4 +13,5 @@
 .Clock-minutes,
 .Clock-seconds {
   display: inline-block;
+  margin: 10px;
 }
