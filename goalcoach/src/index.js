@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {BrowserRouter as Router, Route} from "react-router-dom";
+import { Router, Route, browserHistory } from "react-router-3";
 import {firebaseApp} from './firebase';
 
 import App from './components/App';
@@ -10,15 +10,17 @@ import SignUp from './components/SignUp';
 firebaseApp.auth().onAuthStateChanged(user => {
   if(user) {
     console.log('user has signed in or up', user);
+    browserHistory.push('/app');
   } else {
     console.log('user has signed out or still needs to sign in.');
+    browserHistory.replace('/signin');
   }
 })
 
 ReactDOM.render(
-  <Router>
+  <Router path="/" history={browserHistory}>
     <div>
-      <Route path="/app" exact component={App} />
+      <Route path="/app" component={App} />
       <Route path="/signin" component={SignIn} />
       <Route path="/signup" component={SignUp} />
     </div>
